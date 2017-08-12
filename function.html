@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<meta charset="UTF-8">
+		<title>Javascript par la pratique</title>
+		<link rel="stylesheet" href="style.css">
+	</head>
+	<body>
+		<button id="btnGreet"> Saluer</button>
+		<script>
+			var btnGreet = document.querySelector('#btnGreet');
+    	// anonymous function passée en callback de la fonction addEventListener
+			btnGreet.addEventListener('click', () => {
+				console.log('click');
+			});
+		</script>
+		
+	</body>
+
+</html>
