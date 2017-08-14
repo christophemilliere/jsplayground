@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<meta charset="UTF-8">
+		<title>Javascript par la pratique</title>
+		<link rel="stylesheet" href="style.css">
+	</head>
+	<body>
+		<script>
+			class Vehicle {
+				constructor(brand, model, color) {
+					console.log('Classe Vehicle');
+					this.brand = brand;
+					this.model = model;
+					this.color = color;
+				}
+				honk() {
+					console.log('tuuuuuuuuuuu');
+				}
+			}
+
+			class Bike extends Vehicle {
+				constructor(brand, model, color, fullPowered, exhaustPipeBrand) {
+					console.log('Class Bike');
+					super(brand, model, color);
+					this.fullPowered = fullPowered;
+					this.exhaustPipeBrand = exhaustPipeBrand;
+
+				}
+			}
+			const zxr = new Bike('Kawasaki', 'Ninja ZX-6R', 'verte', true, 'devil');
+			console.log(zxr);
+		</script>
+	</body>
+
+</html>
