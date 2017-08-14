@@ -6,26 +6,69 @@
 		<link rel="stylesheet" href="style.css">
 	</head>
 	<body>
+		<div>azerty</div>
+		<div>dfghj</div>
 		<script>
 			function Vehicle(brand, model, color) {
+				console.log('Je suis dans Vehicle');
 				this.brand = brand;
 				this.model = model;
 				this.color = color;
+				this.speed = 0;
 			}
 			const vehicle = new Vehicle('Renault', 'Clio', 'rouge');
 			const vehicle2 = new Vehicle('Peugeot', '208', 'noire');
 			const vehicle3 = new Vehicle('volgswagen', 'Golf', 'bleue');
 
 			Vehicle.prototype.country = 'France';
+			Vehicle.prototype.honk = function() {
+				console.log('TUUUUUUUUUUUUU');
+			}
+			Vehicle.prototype.acceralate = function(){ 
+				this.speed += 10;
+			}
+
+			Vehicle.prototype.year = '2007';
+			console.log('vehicle.honk()', vehicle.honk());
 			console.log(Vehicle.prototype);
+
 			console.log('vehicle.__proto__',vehicle.__proto__);
 			console.log('vehicle2.__proto__',vehicle2.__proto__);
 			vehicle3.country = 'Allemagne';
+			vehicle3.year = 2016
+			console.log('vehicle3__proto__', vehicle3.__proto__);
 			console.log('Object.keys(vehicle3)', Object.keys(vehicle3));
 			console.log('vehicle3.country', vehicle3.country);
 			console.log('Object.keys(vehicle)', Object.keys(vehicle));
 			console.log('vehicle.country', vehicle.country);
 			console.log('vehicle.__proto__ === Vehicle.prototype', vehicle.__proto__ === Vehicle.prototype)
+
+			//modifier un prototype
+			Vehicle.prototype = {country: 'Allemagne', speedLimitation: false};
+			const vehicle4 = new Vehicle('Mercedes', 'Classe A', 'gris');
+			console.log('vehicle4.__proto__', vehicle4.__proto__);
+
+			// heritage
+			console.log('---------------------EXTENDS--------------------------')
+			function Bike(brand, model, color, fullPowerred, exhaustPipeBrand) {
+				console.log('Je suis dans bike');
+				this.brand = brand
+				this.model = model
+				this.color = color
+				Vehicle.call(this, this.brand, this.model, this.color);
+				this.fullPowerred = fullPowerred;
+				this.exhaustPipeBrand = exhaustPipeBrand;
+			}
+
+			Bike.prototype = Object.create(Vehicle.prototype);
+			Bike.prototype.constructor = Bike;
+			const bike = new Bike('Kawasaki', 'ninja ZX-6R', true, 'devil');
+			console.log('bike', bike);
+			console.log('bike.__proto__', bike.__proto__);
+
+			// instanceof pour le type d'objet
+			console.log('bike instanceof Bike', bike instanceof Bike);
+			console.log('bike instanceof Vehicle', bike instanceof Vehicle);
 		</script>
 	</body>
 
