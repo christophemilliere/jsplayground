@@ -17,6 +17,14 @@
 				honk() {
 					console.log('tuuuuuuuuuuu');
 				}
+
+				get getModel() {
+					return this.model
+				}
+
+				set setModel(value) {
+					this.model = value;
+				}
 			}
 
 			class Bike extends Vehicle {
