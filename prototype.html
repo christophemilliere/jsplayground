@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<meta charset="UTF-8">
+		<title>Javascript par la pratique</title>
+		<link rel="stylesheet" href="style.css">
+	</head>
+	<body>
+		<script>
+			function Vehicle(brand, model, color) {
+				this.brand = brand;
+				this.model = model;
+				this.color = color;
+			}
+			const vehicle = new Vehicle('Renault', 'Clio', 'rouge');
+			const vehicle2 = new Vehicle('Peugeot', '208', 'noire');
+			const vehicle3 = new Vehicle('volgswagen', 'Golf', 'bleue');
+
+			Vehicle.prototype.country = 'France';
+			console.log(Vehicle.prototype);
+			console.log('vehicle.__proto__',vehicle.__proto__);
+			console.log('vehicle2.__proto__',vehicle2.__proto__);
+			vehicle3.country = 'Allemagne';
+			console.log('Object.keys(vehicle3)', Object.keys(vehicle3));
+			console.log('vehicle3.country', vehicle3.country);
+			console.log('Object.keys(vehicle)', Object.keys(vehicle));
+			console.log('vehicle.country', vehicle.country);
+			console.log('vehicle.__proto__ === Vehicle.prototype', vehicle.__proto__ === Vehicle.prototype)
+		</script>
+	</body>
+
+</html>
