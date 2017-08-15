@@ -37,7 +37,69 @@
 				}
 			}
 			const zxr = new Bike('Kawasaki', 'Ninja ZX-6R', 'verte', true, 'devil');
-			console.log(zxr);
+			// this
+			const barman = {
+				name: 'bob',
+				bottles: ['bière', 'coca', 'soda'],
+				informationIsOpen: function(bottle){
+					console.log(bottle + 'a été ouverte');
+					console.log('this dans informationIsOpen', this);
+				},
+				// 1er solution avec  es5 <
+				openBottles: function(){
+					var self = this
+					console.log('this depuis open bottles', this);
+					this.bottles.forEach(function(bottle){
+						console.log('this depuis le forech de la cb', this);
+						self.informationIsOpen(bottle);
+					});
+				},
+				// solution 2 avec es6
+				openBottlesBis: function(){
+					var self = this
+					console.log('this depuis open bottles', this);
+					this.bottles.forEach((bottle) => {
+						console.log('this depuis le forech de la cb', this);
+						this.informationIsOpen(bottle);
+					});
+				}
+			}
+
+			// choisir le this à l'aide call()
+			const user = {
+				civility: 'M',
+				name: {
+					first: 'Peter',
+					last: 'Parker'
+				}
+			};
+			const user2 = {
+				civility: 'Mme',
+				name: {
+					first: 'Elektra',
+					last: 'Natchios'
+				}
+			};
+			const course = {
+				title: "lutter contre l'aracnophobie",
+				duratioin: '1 semaine'
+			}
+			const course2 = {
+				title: "apprendre à pardonner",
+				duratioin: '3 jours'
+			}
+
+			function register(course) {
+				console.log(this, course);
+				const message = `${this.civility} ${this.name.last}, vous êtes bien enregisté${this.civility === 'Mme' ? 'e' : ''} au cours de ${course.title}`;
+				console.log(message);
+			}
+			register.call(user2, course);
+
+			// choisir le this à l'aide bind()
+			const peterRegister = register.bind(user);
+			peterRegister(course2);
+			
 		</script>
 	</body>
 
