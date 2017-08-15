@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<meta charset="UTF-8">
+		<title>Javascript par la pratique</title>
+		<link rel="stylesheet" href="style.css">
+	</head>
+	<body>
+		<script>
+			const languages = ['JavaScript', 'Python', 'C#', 'Ruby', 'PHP'];
+			const musicians = [
+				{
+					id: 1, 
+					first: 'Jimi', 
+					last: 'Hendrix', 
+					instrument : 'guitare', 
+					band: 'Jimi Hendrix Experience', 
+					country: 'USA', 
+					born: '24/11/1942', 
+					dead: '18/09/1970'
+				},
+				{
+					id: 2, 
+					first: 'Stevie Ray', 
+					last: 'Vaughan', 
+					instrument : 'guitare', 
+					band: 'SRV and Double Trouble', 
+					country: 'USA', 
+					born: '24/11/1942', 
+					dead: '27/08/1990'
+				},
+				{
+					id: 3, 
+					first: 'Frank Vincent', 
+					last: 'Zappa', 
+					instrument : 'guitare', 
+					band: 'Mothers of Invention', 
+					country: 'USA', 
+					born: '21/12/1940', 
+					dead: '04/12/1993'
+				},
+				{
+					id: 4, 
+					first: 'John Francis', 
+					last: 'Pastorius', 
+					instrument : 'basse', 
+					band: 'Weather Report', 
+					country: 'USA', 
+					born: '01/12/1951', 
+					dead: '21/09/1987'
+				},
+				{
+					id: 5, 
+					first: 'Larry', 
+					last: 'Graham', 
+					instrument : 'basse', 
+					band: 'Sly and the Family Stone', 
+					country: 'USA', 
+					born: '14/08/1946', 
+					dead: ''
+				},
+				{
+					id: 6, 
+					first: 'Robert', 
+					last: 'Trujillo', 
+					instrument : 'basse', 
+					band: 'Infectious Groove', 
+					country: 'USA', 
+					born: '23/10/1964', 
+					dead: ''
+				},
+				{
+					id: 7, 
+					first: 'John', 
+					last: 'Lydon', 
+					instrument : 'chant', 
+					band: 'Sex Pistols', 
+					country: 'UK', 
+					born: '31/01/1956', 
+					dead: ''
+				},    
+				{
+					id: 8, 
+					first: 'Nina', 
+					last: 'Hagen', 
+					instrument : 'chant', 
+					band: 'Nina Hagen Band', 
+					country: 'DE', 
+					born: '11/03/1955', 
+					dead: ''
+				}   
+			];
+
+			//Array.of and Array.from (ES6)
+			let numbers = Array.of(1,2,3);
+			//cast value in array with Array.from()
+			function double() {
+				const args = Array.from(arguments);
+				const double = args.map( function(number) { 
+					return number * 2;
+				});
+			}
+
+			//map
+			const fullNames = musicians.map((muscian) => `${muscian.first} ${muscian.last}`);
+			// filter
+			const musiciansUs = musicians.filter((musician) => musician.country === 'USA');
+			//sort
+			let musicianAlpha = musicians.sort((m1, m2) => {
+				if(m1.last > m2.last){
+					return 1;
+				}else{
+					return -1;
+				}
+			});
+
+			// reduce
+			const nums = [1, 2, 3, 4, 5];
+			let reduceNUmbers = nums.reduce((acc, current) => {
+				return acc + current;
+			}, 0); 
+
+			const cart = [{
+					id: 1,
+					title: 'pain',
+					price: 1.10
+				},
+				{
+					id: 2,
+					title: '2 bouteille eau',
+					price: 2.00
+				}
+			]
+
+			let  totalCart = cart.reduce((acc, current) => {
+				return acc + current.price
+			}, 0);
+
+			const transportation = ['voiture', 'vélo', 'bus', 'voiture', 'voiture', 'marche', 'vélo', 'moto'];
+			const transportObj = transportation.reduce((acc, current) => {
+				if(!acc[current]){
+					acc[current] = 0
+				}
+				acc[current] +=1;
+				return acc;
+			}, {});
+
+			const prices = [100, 12, 9.5, 140, 14.20];
+			const VAT = 0.2;
+			
+			//créer map avec reduce
+			const priceWithVAT = prices.reduce((acc, current) => {
+				price = current
+				price = price + price * VAT;
+				acc.push(price);
+				return acc  
+			}, []);
+			// créer filter avec reduce
+			const britishMusician = musicians.reduce((acc, current) => {
+				if(current.country === 'UK'){
+					acc.push(current)
+				}
+				return acc;
+			}, []);
+			// cloner ES5
+			let musician2 = musicians.slice(); // sans params slice fait une copie
+			let musician3 = [].concat(musicians);
+			// cloner ES6
+			let musician4 = [...musicians];
+			let musician5 = Array.from(musicians);
+
+
+		</script>
+	</body>
+
+</html>
