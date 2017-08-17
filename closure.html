@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<meta charset="UTF-8">
+		<title>Javascript par la pratique</title>
+		<link rel="stylesheet" href="style.css">
+	</head>
+	<body>
+		<script>
+			function quote () {
+				const advice = 'quand les mouettes on pied, il est temps de virer';
+				const reputation = ' Mieux vaut un bon renom que  du bien  plein la maison';
+				return function() {
+					console.log(` le conseil capturé est ${advice}`);
+					console.log(` ainsi que ${reputation}`);
+				}
+			}
+
+			let getQuote = quote();
+			//getQuote();
+
+			const monster = {
+				name: 'zombie',
+				energy: 20,
+				alive: true
+			}
+
+			/*
+			const player = {
+				score:0,
+				enemyKilled: function(enemy){
+					console.log(`${enemy.name} a été tué`);
+					this.score += 10;
+				},
+				attack: function(enemy) {
+					enemy.energy -= 10;
+					if(enemy.energy <= 0) {
+						this.enemyKilled(enemy);
+					}
+				},
+				getScore: function() {
+					return this.score;
+				}
+			}
+			*/
+
+			// rendre une variable privé grace aux closures
+			// passer des arguments passés  à la "outer function"
+			function createPlayer(playerName, gameName) {
+				let score = 0;
+				return {
+					enemyKilled: function(enemy){
+						console.log(`${enemy.name} a été tué`);
+						score += 10;
+					},
+					attack: function(enemy) {
+						if(!enemy.alive){
+							console.log('Vous avez déjà tué votre enemis');
+						}else{
+							enemy.energy -= 10;
+							if(enemy.energy <= 0) {
+								this.enemyKilled(enemy);
+								enemy.alive =  false;
+							}
+						}
+					},
+					getScore: function() {
+						console.log(`${playerName} votre score à ${gameName} est ${score}`);
+						return score;
+					}
+				}
+			}
+
+		</script>
+	</body>
+
+</html>
