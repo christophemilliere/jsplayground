@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<meta charset="UTF-8">
+		<title>Javascript par la pratique</title>
+		<link rel="stylesheet" href="style.css">
+	</head>
+	<body>
+		<div>
+			<video src='/video/video.mp4' id='player' class="video-medium"></video>
+			<input type='range' id='speedSlider' min='0.5' max='2' value='1' step='0.1' class="vertical" >
+			<span id='speed'>1x</span>
+		</div>
+		<div id='controls'>
+			<button id='btnPlay'> Play</button>
+			<button id='btnStop'>Stop</button>
+			Chercher <input type='range' id='seekbar' step='1' value='0' >
+		</div>
+		<script>
+			const player = document.querySelector('#player');
+			const speedSlider = document.querySelector('#speedSlider');
+			const  speed = document.querySelector('#speed');
+			const btnPlay = document.querySelector('#btnPlay');
+			const btnStop = document.querySelector('#btnStop');
+			const videoDuration = player.duration ;
+			const seekbar = document.querySelector('#seekbar');
+
+			btnPlay.addEventListener('click', playVideo);
+			btnStop.addEventListener('click', stopVideo);
+			speedSlider.addEventListener('change', adjustSpeed);
+			player.addEventListener('durationchange', setupseekbar);
+			player.addEventListener('canplay', setupPlayer);
+			player.addEventListener('ended', clean);
+			seekbar.addEventListener('change', seekVideo);
+			seekbar.addEventListener('timeupdate', updateUi );
+
+			function clean() {
+				if(player.paused) {
+					btnPlay.innerText = 'play';
+				}
+			}
+			function setupPlayer() {
+				setupseekbar();
+				player.volume = 0.5;
+			}
+			function updateUi() {
+				seekbar.value = video.currentTime;
+			}
+			function seekVideo() {
+				player.currentTime = seekbar.value
+			}
+			function setupseekbar() {
+				seekbar.max = player.duration
+			}
+			function playVideo(evt){
+				console.log('Play');
+				if(player.paused) {
+					player.play();
+					btnPlay.innerText = 'pause'
+				}else{
+					player.pause();
+					btnPlay.innerText = 'play'
+				}
+			}
+
+			function stopVideo(evt){
+				console.log('stop')
+				player.currentTime = 0;
+			}
+
+			function adjustSpeed(evt){
+				console.log(evt.target.value);
+				const currentPlayBackRate = evt.target.value;
+				speed.innerHTML = `${currentPlayBackRate}x`;
+				player.playbackRate = currentPlayBackRate;
+			}
+
+		</script>
+	</body>
+
+</html>
